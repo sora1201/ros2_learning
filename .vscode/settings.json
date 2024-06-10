@@ -1,0 +1,32 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/home/sora/ems_ws/build/turtlebot3_teleop",
+        "/home/sora/ems_ws/install/turtlebot3_teleop/lib/python3.8/site-packages",
+        "/home/sora/ems_ws/build/turtlebot3_example",
+        "/home/sora/ems_ws/install/turtlebot3_example/lib/python3.8/site-packages",
+        "/home/sora/ems_ws/install/scout_msgs/lib/python3.8/site-packages",
+        "/home/sora/ems_ws/build/nmea_navsat_driver/src",
+        "/home/sora/ems_ws/install/nmea_navsat_driver/lib/python3.8/site-packages",
+        "/home/sora/ems_ws/install/lidarslam_msgs/lib/python3.8/site-packages",
+        "/home/sora/ems_ws/build/bno055",
+        "/home/sora/ems_ws/install/bno055/lib/python3.8/site-packages",
+        "/opt/ros/foxy/lib/python3.8/site-packages",
+        "",
+        "/home/sora/emsenv3.8/lib/python3.8/site-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/sora/ems_ws/build/turtlebot3_teleop",
+        "/home/sora/ems_ws/install/turtlebot3_teleop/lib/python3.8/site-packages",
+        "/home/sora/ems_ws/build/turtlebot3_example",
+        "/home/sora/ems_ws/install/turtlebot3_example/lib/python3.8/site-packages",
+        "/home/sora/ems_ws/install/scout_msgs/lib/python3.8/site-packages",
+        "/home/sora/ems_ws/build/nmea_navsat_driver/src",
+        "/home/sora/ems_ws/install/nmea_navsat_driver/lib/python3.8/site-packages",
+        "/home/sora/ems_ws/install/lidarslam_msgs/lib/python3.8/site-packages",
+        "/home/sora/ems_ws/build/bno055",
+        "/home/sora/ems_ws/install/bno055/lib/python3.8/site-packages",
+        "/opt/ros/foxy/lib/python3.8/site-packages",
+        "",
+        "/home/sora/emsenv3.8/lib/python3.8/site-packages"
+    ]
+}
