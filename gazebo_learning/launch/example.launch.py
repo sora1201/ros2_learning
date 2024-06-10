@@ -36,21 +36,22 @@ import os
 
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, ExecuteProcess, IncludeLaunchDescription, EmitEvent, RegisterEventHandler, TimerAction
+from launch.actions import DeclareLaunchArgument, ExecuteProcess, IncludeLaunchDescription, EmitEvent, RegisterEventHandler
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.event_handlers import OnProcessExit
 from launch.events import Shutdown
 from launch_ros.actions import Node
 from launch.conditions import IfCondition, UnlessCondition
-from launch.substitutions import Command, LaunchConfiguration, PythonExpression, FindExecutable, PathJoinSubstitution
-from launch_ros.substitutions import FindPackageShare
+from launch.substitutions import Command, LaunchConfiguration, PythonExpression
 
 def generate_launch_description():
-  share_dir = get_package_share_directory('dtw_robot')
-  urdf_share_dir = get_package_share_directory('dtw_robot')
-  xacro_path = os.path.join(urdf_share_dir, 'urdf', 'dtw_robot.xacro')
-  rviz_config_file = os.path.join(share_dir, 'rviz', 'example.rviz')
-  world = os.path.join(share_dir, 'worlds', 'example.world')
+  model_name = 'dtw_robot'
+  xacro = model_name + '.urdf.xacro'
+  urdf_share_dir = get_package_share_directory('descriptions')
+  xacro_path = os.path.join(urdf_share_dir, 'urdf', model_name, xacro)
+  share_dir = get_package_share_directory('gazebo_learning')
+  rviz_config_file = os.path.join(share_dir, 'rviz', 'ros2_learning.rviz')
+  world = os.path.join(share_dir, 'worlds', 'test_room.world')
 
   declare_gpu_cmd = DeclareLaunchArgument(
     'gpu',
@@ -63,13 +64,6 @@ def generate_launch_description():
   gpu = LaunchConfiguration('gpu')
   organize_cloud = LaunchConfiguration('organize_cloud')
   robot_description = Command(['xacro',' ', xacro_path, ' gpu:=', gpu, ' organize_cloud:=', organize_cloud])
-
-  # robot_description = Command([
-  #       PathJoinSubstitution([FindExecutable(name="xacro")]), " ",
-  #       PathJoinSubstitution(
-  #           [xacro_path]
-  #       ),
-  #   ])
 
   start_robot_state_publisher_cmd = Node(
     package='robot_state_publisher',
@@ -87,7 +81,7 @@ def generate_launch_description():
     executable='spawn_entity.py',
     arguments=[
       '-entity', 'example',
-      '-topic', 'robot_description'
+      '-topic', 'robot_description',
     ],
     output='screen',
   )
@@ -117,6 +111,13 @@ def generate_launch_description():
     launch_arguments={'world' : world, 'gui' : gui}.items()
   )
 
+  joint_state_publisher_cmd = Node(
+    package="joint_state_publisher",
+    executable="joint_state_publisher",
+    name="joint_state_publisher",
+    output="screen"
+  ),
+
   ld = LaunchDescription()
 
   # Add the actions
@@ -128,5 +129,6 @@ def generate_launch_description():
   ld.add_action(spawn_example_cmd)
   ld.add_action(start_rviz_cmd)
   ld.add_action(exit_event_handler)
+  ld.add_action(joint_state_publisher_cmd)
 
   return ld
