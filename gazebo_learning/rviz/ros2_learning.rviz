@@ -54,7 +54,7 @@ Visualization Manager:
       Color: 255; 255; 255
       Color Transformer: Intensity
       Decay Time: 0
-      Enabled: false
+      Enabled: true
       Invert Rainbow: false
       Max Color: 255; 255; 255
       Max Intensity: 0
@@ -71,10 +71,10 @@ Visualization Manager:
         Durability Policy: Volatile
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /lidar_cloud2
+        Value: /points2
       Use Fixed Frame: true
       Use rainbow: true
-      Value: false
+      Value: true
     - Alpha: 1
       Class: rviz_default_plugins/RobotModel
       Collision Enabled: false
@@ -234,7 +234,7 @@ Visualization Manager:
       Enabled: true
       Name: TrajectoryNodeList
       Namespaces:
-        {}
+        Trajectory 0: true
       Topic:
         Depth: 5
         Durability Policy: Volatile
@@ -254,7 +254,7 @@ Visualization Manager:
       Color: 255; 255; 255
       Color Transformer: Intensity
       Decay Time: 0
-      Enabled: true
+      Enabled: false
       Invert Rainbow: false
       Max Color: 255; 255; 255
       Max Intensity: 4096
@@ -274,7 +274,7 @@ Visualization Manager:
         Value: /scan_matched_points2
       Use Fixed Frame: true
       Use rainbow: true
-      Value: true
+      Value: false
     - Class: rviz_default_plugins/MarkerArray
       Enabled: true
       Name: LandmarkPosesList
@@ -290,7 +290,7 @@ Visualization Manager:
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
-    Fixed Frame: base_link
+    Fixed Frame: map
     Frame Rate: 30
   Name: root
   Tools:
@@ -330,7 +330,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 8.426037788391113
+      Distance: 8.319245338439941
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -345,10 +345,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.8203974962234497
+      Pitch: 0.4753971993923187
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 2.2903964519500732
+      Yaw: 2.8654019832611084
     Saved: ~
 Window Geometry:
   Displays:
@@ -365,4 +365,4 @@ Window Geometry:
     collapsed: false
   Width: 1848
   X: 72
-  Y: 867
+  Y: 27

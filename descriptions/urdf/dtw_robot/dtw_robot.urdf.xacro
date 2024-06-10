@@ -11,13 +11,12 @@
     <xacro:wheel_macro prefix="wheel_left" parent="base_link" xyz="0 0.1 0.05"/>
     <xacro:wheel_macro prefix="wheel_right" parent="base_link" xyz="0 -0.1 0.05"/>
     <!-- <xacro:laser_macro prefix="front_laser" parent="base_link" xyz="0 0 0.13"/> -->
-    <xacro:imu_macro prefix="imu" parent="base_link" xyz="-0.05 0 0.10" robot_name="$(arg robot_name)"/>
+    <xacro:imu_macro prefix="imu" parent="base_link" xyz="0.0 0.0 0.0" robot_name="$(arg robot_name)"/>
 
     <xacro:include filename="$(find velodyne_description)/urdf/VLP-16.urdf.xacro"/>
-    <xacro:VLP-16 parent="base_link" name="velodyne" topic="/lidar_cloud2" organize_cloud="fasle" hz="10" samples="440" gpu="false">
-        <origin xyz="0 0 0.4" rpy="0 0 0" />
+    <xacro:VLP-16 parent="base_link" name="velodyne" topic="/points2" organize_cloud="false" hz="10" samples="440" gpu="false">
+        <origin xyz="0 0 0.1" rpy="0 0 0" />
     </xacro:VLP-16>
-
 
     <gazebo>
         <plugin name="diff_drive_plugin" filename="libgazebo_ros_diff_drive.so">
@@ -28,32 +27,31 @@
             <right_joint>wheel_right_joint</right_joint>
 
             <!-- kinematics -->
-            <wheel_separation>0.160</wheel_separation>
-            <wheel_diameter>0.066</wheel_diameter>
+            <wheel_separation>0.20</wheel_separation>
+            <wheel_diameter>0.05</wheel_diameter>
 
             <!-- limits -->
-            <max_wheel_torque>20</max_wheel_torque>
-            <max_wheel_acceleration>1.0</max_wheel_acceleration>
+            <max_wheel_torque>10</max_wheel_torque>
+            <max_wheel_acceleration>0.5</max_wheel_acceleration>
 
             <command_topic>cmd_vel</command_topic>
 
             <!-- output -->
             <publish_odom>true</publish_odom>
             <publish_odom_tf>true</publish_odom_tf>
-            <publish_wheel_tf>false</publish_wheel_tf>
+            <publish_wheel_tf>true</publish_wheel_tf>
 
             <odometry_topic>odom</odometry_topic>
             <odometry_frame>odom</odometry_frame>
             <robot_base_frame>base_link</robot_base_frame>
         </plugin>
-        <plugin name="joint_state_publisher_plugin" filename="libgazebo_ros_joint_state_publisher.so">
+        <!-- <plugin name="joint_state_publisher_plugin" filename="libgazebo_ros_joint_state_publisher.so">
             <ros>
-              <!-- <namespace>/br</namespace> -->
               <remapping>~/out:=joint_states</remapping>
             </ros>
             <update_rate>30</update_rate>
             <joint_name>wheel_left_joint</joint_name>
             <joint_name>wheel_right_joint</joint_name>
-        </plugin>
+        </plugin> -->
     </gazebo>
 </robot>
